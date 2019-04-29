@@ -1,0 +1,11 @@
+.cart-item {
+    background-color: #FFFFFF50;
+    height: 100px;
+    margin: 15px 0;
+    text-align: left;
+    overflow: hidden;
+}
+
+.cart-item__image {
+    width: 100px;
+}

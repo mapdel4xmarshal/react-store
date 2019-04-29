@@ -1,0 +1,14 @@
+.cart {
+    background-color: #32c996;
+    padding: 10px 0;
+    color: #FFFFFF;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.cart__title {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: bold;
+}
+
