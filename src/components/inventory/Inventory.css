@@ -6,3 +6,7 @@
     overflow-y: auto;
     justify-content: center;
 }
+
+.inventory::-webkit-scrollbar {
+    width: 0px;
+}

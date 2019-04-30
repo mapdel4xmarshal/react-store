@@ -12,10 +12,11 @@ class Cart extends Component {
 
   eachItem(item, index) {
     return (
-      <CartItem index={index}
-        imgSrc={item.imgSrc}
-        price={item.price}>
-      </CartItem>
+        <CartItem index={index}
+                  key={index}
+                  imgSrc={require('../../assets/images/' + item.imgSrc)}
+                  price={item.price}>
+        </CartItem>
     )
   }
 
@@ -25,17 +26,14 @@ class Cart extends Component {
   }
 
   renderTotal() {
-    if(this.state.itemsCount > 0)
-    return (
-      <div>
-        <i></i>
-        <div>
-          <span>Total:</span>
-          <span>$14.00</span>
-        </div>
-        <div>Empty Cart</div>
-      </div>
-    )
+    if (this.state.itemsCount > 0)
+      return (
+          <div className="cart__summary">
+            <span className="cart__total">Total: $14.00</span>
+            <span className="cart__empty animate">Empty Cart</span>
+            <div className="cart_confirm animate">Confirm Purchase</div>
+          </div>
+      )
   }
 
   render() {

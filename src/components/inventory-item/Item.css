@@ -1,17 +1,17 @@
 .item {
-    height: 300px;
     border: 1px solid #32c996;
     display: grid;
-    grid-template-rows: 150px 20px auto;
+    grid-template-rows: 155px 20px auto;
+    height: 300px;
     overflow: hidden;
     padding: 10px;
 }
 
 .item:hover {
+    box-shadow: 0px 0px 2px 1px #32c996b8;
     cursor: pointer;
     -webkit-box-shadow: 0px 0px 2px 1px #32c996b8;
     -moz-box-shadow: 0px 0px 2px 1px #32c996b8;
-    box-shadow: 0px 0px 2px 1px #32c996b8;
 }
 
 .item__info{
@@ -20,36 +20,41 @@
 
 .item__action {
     background-color: #32c996;
-    margin: auto;
     border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    margin: 15px auto;
+    padding: 5px;
     text-align: center;
-    font-size: 14px;
-    padding: 2px;
+}
+
+.item__action:hover{
+    color: #FFFFFF;
 }
 
 .item__image {
+    height: 160px;
     margin: auto;
     max-width: 200px;
     object-fit: cover;
-    height: 155px;
 }
 
 .item__name {
-    text-transform: capitalize;
-    text-align: center;
-    font-weight: 500;
     display: block;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
 }
 
 .item__stock-info {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 36px;
+    font-weight: 500;
 }
 
 .item__quantity {
-    font-weight: 500;
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 400;
     padding-left: 10px;
 }
 
