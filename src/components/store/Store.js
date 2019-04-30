@@ -20,7 +20,7 @@ class Store extends Component {
           </header>
           <div className="store__main">
             <Inventory items={this.state.items}></Inventory>
-            <Cart items={this.state.items}></Cart>
+            <Cart></Cart>
           </div>
         </div>
     );

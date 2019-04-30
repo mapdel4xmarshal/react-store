@@ -20,11 +20,16 @@
 .item__action {
     background-color: #32c996;
     border-radius: 5px;
+    cursor: pointer;
     font-size: 18px;
     font-weight: 500;
     margin: 15px auto;
     padding: 5px;
     text-align: center;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .item__action:hover{

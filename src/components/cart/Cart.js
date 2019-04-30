@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 import CartItem from '../cart-item/CartItem'
 import './Cart.css'
 
@@ -41,11 +42,16 @@ class Cart extends Component {
         <div className="cart">
           <div className="cart__title">Shopping Cart</div>
           <small>{this.renderItemsCount()}</small>
-          {this.props.items.map(this.eachItem)}
+          {this.props.cart.items.map(this.eachItem)}
           {this.renderTotal()}
         </div>
     );
   }
 }
 
-export default Cart
+function mapStateToProps(state){   console.log("state",state)
+    return {
+        cart: state.cartReducer,
+    };
+}
+export default connect(mapStateToProps)(Cart);
