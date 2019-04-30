@@ -6,7 +6,7 @@ class Item extends Component {
     return (
         <div className="item animate">
           <img className="item__image" src={require(`${'../../assets/images/'}${this.props.imgSrc}`)} alt={this.props.imgName} />
-          <span className="item__name">{this.props.itemName}</span>
+          <span className="item__name" title={this.props.itemName}>{this.props.itemName}</span>
           <div className="item__info">
             <div className="item__stock-info">
               ${Math.ceil(this.props.price)}

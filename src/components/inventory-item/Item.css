@@ -9,7 +9,6 @@
 
 .item:hover {
     box-shadow: 0px 0px 2px 1px #32c996b8;
-    cursor: pointer;
     -webkit-box-shadow: 0px 0px 2px 1px #32c996b8;
     -moz-box-shadow: 0px 0px 2px 1px #32c996b8;
 }
@@ -43,8 +42,11 @@
     display: block;
     font-size: 16px;
     font-weight: 500;
+    overflow: hidden;
     text-align: center;
+    text-overflow: ellipsis;
     text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .item__stock-info {
