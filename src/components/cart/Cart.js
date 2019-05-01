@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux';
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
+import {connect} from 'react-redux';
 import CartItem from '../cart-item/CartItem'
 import './Cart.css'
 
@@ -13,11 +14,16 @@ class Cart extends Component {
 
   eachItem(item, index) {
     return (
+      <CSSTransition
+          key={index}
+          classNames="cart-item"
+          timeout={{enter: 500, exit: 300}}>
         <CartItem index={index}
                   key={index}
                   imgSrc={require('../../assets/images/' + item.imgSrc)}
                   price={item.price}>
         </CartItem>
+      </CSSTransition>
     )
   }
 
@@ -42,16 +48,15 @@ class Cart extends Component {
         <div className="cart">
           <div className="cart__title">Shopping Cart</div>
           <small>{this.renderItemsCount()}</small>
-          {this.props.cart.items.map(this.eachItem)}
+          <TransitionGroup>
+            {this.props.cart.items.map(this.eachItem)}
+          </TransitionGroup>
           {this.renderTotal()}
         </div>
     );
   }
 }
 
-function mapStateToProps(state){   console.log("state",state)
-    return {
-        cart: state.cartReducer,
-    };
-}
-export default connect(mapStateToProps)(Cart);
+export default connect(state => ({
+  cart: state.cartReducer,
+}))(Cart)

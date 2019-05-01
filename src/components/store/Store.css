@@ -48,3 +48,12 @@
     }
 }
 
+.Store-appear {
+    opacity: 0.01;
+}
+
+.Store-appear.Store-appear-active {
+    opacity: 1;
+    transition: opacity .5s cubic-bezier(0.5,-0.25, 0.25, 1.5);
+}
+

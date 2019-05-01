@@ -16,8 +16,9 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-function handleAddItem(state, action) {  console.log("statestate",[...state.items, action.item])
-    return [...state.items, action.item]
+function handleAddItem(state, action) {
+    const newState = {items: [...state.items, action.item]}
+    return {...state, ...newState}
 }
 
 export default cartReducer;

@@ -55,3 +55,34 @@
     font-size: 14px;
     font-weight: 500;
 }
+
+
+.cart-item-appear {
+    opacity: 0.01;
+}
+
+.cart-item-appear.cart-item-appear-active {
+    opacity: 1;
+    transition: opacity .5s cubic-bezier(0.5,-0.25, 0.25, 1.5);
+}
+
+.cart-item-enter {
+    opacity: 0.01;
+    transform: translate(0, 1em) scale(0,0);
+}
+
+.cart-item-enter.cart-item-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-out, transform 500ms ease-in-out;
+    transform:translate(0,0);
+}
+
+.cart-item-exit {
+    opacity: 1;
+}
+
+.cart-item-exit.cart-item-exit-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in, transform 300ms ease-in-out;
+    transform:translate(-5em, 0) scale(0,0);
+}

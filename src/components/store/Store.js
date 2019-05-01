@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import Cart from '../cart/Cart'
 import Inventory from '../inventory/Inventory'
 import './Store.css';
@@ -14,15 +15,23 @@ class Store extends Component {
 
   render() {
     return (
-        <div>
-          <header className="store__header">
-            <span className="store__navigation">Fruit</span>
-          </header>
-          <div className="store__main">
-            <Inventory items={this.state.items}></Inventory>
-            <Cart></Cart>
+      <TransitionGroup>
+        <CSSTransition
+            key="1"
+            classNames="Store"
+            appear={true}
+            timeout={{enter: 500, exit: 300}}>
+          <div>
+            <header className="store__header">
+              <span className="store__navigation">Fruit</span>
+            </header>
+            <div className="store__main">
+              <Inventory items={this.state.items}></Inventory>
+              <Cart></Cart>
+            </div>
           </div>
-        </div>
+        </CSSTransition>
+      </TransitionGroup>
     );
   }
 }
