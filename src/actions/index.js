@@ -1,6 +1,21 @@
 import * as actionType from './ActionType'
 
-export const addItem = (item) => ({
-    type: actionType.ADD_ITEM,
+export const addItemToCart = (item) => ({
+    type: actionType.ADD_ITEM_TO_CART,
+    item
+})
+
+export const removeItemFromCart = (item) => ({
+    type: actionType.REMOVE_ITEM_FROM_CART,
+    item
+})
+
+export const addItemToInventory = (item) => ({
+    type: actionType.ADD_ITEM_TO_INVENTORY,
+    item
+})
+
+export const removeItemFromInventory = (item) => ({
+    type: actionType.REMOVE_ITEM_FROM_INVENTORY,
     item
 })
