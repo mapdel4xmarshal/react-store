@@ -11,6 +11,9 @@ const cartReducer = (state = initialState, action) => {
         case actionType.REMOVE_ITEM_FROM_CART:
             return newState = state - action.payload
 
+        case actionType.DELETE_ITEM_FROM_CART:
+            return newState = state - action.payload
+
         case actionType.CONFIRM_PURCHASE:
             return newState = state - action.payload
 
@@ -19,7 +22,7 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-function handleAddItem(state, action) {
+const handleAddItem = (state, action) => {
     const id = action.item.id
     let newState = {items: {...state.items, ...{[id]: action.item}}}
 
@@ -29,7 +32,7 @@ function handleAddItem(state, action) {
     return {...state, ...newState}
 }
 
-function updateCart(id, state, newState) {
+const updateCart = (id, state, newState) => {
     const price = newState.items[id].price
     newState.itemsCount = Object.keys(newState.items).length
 
@@ -46,9 +49,9 @@ function updateCart(id, state, newState) {
     return newState
 }
 
-function getTotal(newState) {
+const getTotal = (newState) => {
     let totalAmount = 0;
-    for(const [, item] of Object.entries(newState.items)) {
+    for (const [, item] of Object.entries(newState.items)) {
         totalAmount += parseFloat(item.amount)
     }
     return totalAmount
