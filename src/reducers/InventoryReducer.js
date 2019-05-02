@@ -17,7 +17,6 @@ const inventoryReducer = (state = initialState, action) => {
 function handleRemoveItem(state, action) {
   const newState =  {...state}
   newState.items[action.item.id].quantityRemaining = Math.max(action.item.quantityRemaining - 1, 0)
-  console.log(newState)
   return newState
 }
 

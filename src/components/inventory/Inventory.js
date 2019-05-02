@@ -50,5 +50,5 @@ export default connect(state => ({
         inventory: state.inventoryReducer
     }),
     dispatch => ({
-        actions: bindActionCreators({removeItemFromInventory, addItemToCart}, dispatch)
+        actions: bindActionCreators({removeItemFromInventory, addItemToCart}, dispatch)    //todo: revisit
     }))(Inventory)
