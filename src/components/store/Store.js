@@ -2,15 +2,13 @@ import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import Cart from '../cart/Cart'
 import Inventory from '../inventory/Inventory'
+import {connect} from 'react-redux';
 import './Store.css';
-import storeItems from './store_items'
 
 class Store extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      items: storeItems
-    }
+    super(props)
+   console.log()
   }
 
   render() {
@@ -26,7 +24,7 @@ class Store extends Component {
               <span className="store__navigation">Fruit</span>
             </header>
             <div className="store__main">
-              <Inventory items={this.state.items}></Inventory>
+              <Inventory category={"fruit"}></Inventory>
               <Cart></Cart>
             </div>
           </div>
@@ -36,4 +34,6 @@ class Store extends Component {
   }
 }
 
-export default Store
+export default connect(state => ({
+  inventory: state.inventoryReducer,
+}))(Store)

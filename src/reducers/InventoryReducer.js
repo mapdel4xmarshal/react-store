@@ -1,22 +1,24 @@
 import * as actionType from '../actions/ActionType'
+import inventoryItems from '../assets/store_items'
 
-const initialState = {items: []}
+const initialState = {items: inventoryItems};
 
-const cartReducer = (state = initialState, action) => {
-  let newState
+const inventoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.ADD_ITEM_TO_INVENTORY:
-      return handleAddItem(state, action)
+      return handleRemoveItem(state, action)
     case actionType.REMOVE_ITEM_FROM_INVENTORY:
-      return newState = state - action.payload
+      return handleRemoveItem(state, action)
     default:
       return state
   }
 }
 
-function handleAddItem(state, action) {
-  const newState = {items: [...state.items, action.item]}
-  return {...state, ...newState}
+function handleRemoveItem(state, action) {
+  const newState =  {...state}
+  newState.items[action.item.id].quantityRemaining = Math.max(action.item.quantityRemaining - 1, 0)
+  console.log(newState)
+  return newState
 }
 
-export default cartReducer
+export default inventoryReducer

@@ -6,39 +6,49 @@ import {removeItemFromInventory, addItemToCart} from '../../actions'
 import './Inventory.css'
 
 class Inventory extends Component {
-  constructor(props) {
-    super(props)
-    this.eachItem = this.eachItem.bind(this)
-    this.addItem = this.addItem.bind(this)
-  }
+    constructor(props) {
+        super(props)
+        this.eachItem = this.eachItem.bind(this)
+        this.addItem = this.addItem.bind(this)
+        console.log(this.props)
+    }
 
-  addItem(item) {
-    this.props.dispatch(addItemToCart(item))
-    this.props.dispatch(removeItemFromInventory(item))
-  }
+    addItem(item) {
+        /* this.props.dispatch(addItemToCart(item))
+         this.props.dispatch(removeItemFromInventory(item))*/
+        if (item.quantityRemaining > 0) {
+            this.props.actions.addItemToCart(item)
+            this.props.actions.removeItemFromInventory(item)
+        }
+    }
 
-  eachItem(item, index) {
-    return (
-        <Item key={index}
-              itemName={item.itemName}
-              imgSrc={item.imgSrc}
-              price={item.price}
-              quantityRemaining={item.quantityRemaining}
-              clickHandler={this.addItem}
-        >
-        </Item>
-    )
-  }
+    eachItem(item, index) {
+        if (item.category == this.props.category)
+            return (
+                <Item key={index}
+                      id={index}
+                      itemName={item.itemName}
+                      imgSrc={item.imgSrc}
+                      price={item.price}
+                      quantityRemaining={item.quantityRemaining}
+                      clickHandler={this.addItem}
+                >
+                </Item>
+            )
+    }
 
-  render() {
-    return (
-        <div className="inventory">
-          {this.props.items.map(this.eachItem)}
-        </div>
-    );
-  }
+    render() {
+        return (
+            <div className="inventory">
+                {this.props.inventory.items.map(this.eachItem)}
+            </div>
+        );
+    }
 }
 
-export default connect(dispatch => ({
-  actions: bindActionCreators(addItemToCart, dispatch)
-}))(Inventory)
+export default connect(state => ({
+        inventory: state.inventoryReducer
+    }),
+    dispatch => ({
+        actions: bindActionCreators({removeItemFromInventory, addItemToCart}, dispatch)
+    }))(Inventory)

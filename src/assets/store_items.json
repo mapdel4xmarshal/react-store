@@ -1,35 +1,41 @@
 [
   {
+    "category": "fruit",
     "itemName": "banana",
     "imgSrc": "Banana.png",
     "price": 1.25,
     "quantityRemaining": 10
   },
   {
+    "category": "fruit",
     "itemName": "apple",
     "imgSrc": "Apple.png",
     "price": 2.50,
     "quantityRemaining": 5
   },
   {
+    "category": "fruit",
     "itemName": "raspberry",
     "imgSrc": "Raspberry.png",
     "price": 4.00,
     "quantityRemaining": 2
   },
   {
+    "category": "fruit",
     "itemName": "kiwi",
     "imgSrc": "Kiwi.png",
     "price": 3.33,
     "quantityRemaining": 15
   },
   {
+    "category": "fruit",
     "itemName": "very delicious pineapple with a long name",
     "imgSrc": "Pineapple.png",
     "price": 4.75,
     "quantityRemaining": 1
   },
   {
+    "category": "fruit",
     "itemName": "strawberries",
     "imgSrc": "Strawberry.png",
     "price": 2.05,

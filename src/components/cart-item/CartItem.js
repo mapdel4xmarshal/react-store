@@ -17,7 +17,6 @@ class CartItem extends Component {
             <span className="cart-item__pricing">@$5each = $10</span>
             <span className="cart-item__delete">Delete</span>
           </div>
-
         </div>
     );
   }

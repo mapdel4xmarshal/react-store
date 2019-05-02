@@ -14,7 +14,7 @@ class Item extends Component {
 
     render() {
         return (
-            <div className="item animate">
+            <div className={`item animate ${this.props.quantityRemaining > 0? '' : 'item--empty'}`}>
                 <img className="item__image" src={require(`${'../../assets/images/'}${this.props.imgSrc}`)}
                      alt={this.props.imgName}/>
                 <span className="item__name" title={this.props.itemName}>{this.props.itemName}</span>
