@@ -15,7 +15,8 @@ class CartItem extends Component {
           </div>
           <div>
             <span className="cart-item__pricing">@${this.props.price}each = ${this.props.amount}</span>
-            <span className="cart-item__delete">Delete</span>
+            <span className="cart-item__delete animate"
+                  onClick={e => this.props.handleDelete(this.props.id)}>Delete</span>
           </div>
         </div>
     );

@@ -51,6 +51,12 @@
     -ms-user-select: none;
 }
 
+.item__action--disabled{
+    background-color: gray;
+    color: #000000 !important;
+    cursor: not-allowed;
+}
+
 .item__action:hover{
     color: #FFFFFF;
 }

@@ -36,10 +36,15 @@
 
 .cart-item__delete{
     color: #FFFFFF;
+    cursor: pointer;
     float: right;
     font-size: 16px;
     font-weight: 400;
     text-align: right;
+}
+
+.cart-item__delete:hover{
+    color: red;
 }
 
 .cart-item__image {

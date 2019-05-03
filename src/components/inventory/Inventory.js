@@ -14,27 +14,30 @@ class Inventory extends Component {
     }
 
     addItem(item) {
-        /* this.props.dispatch(addItemToCart(item))
-         this.props.dispatch(removeItemFromInventory(item))*/
         if (item.quantityRemaining > 0) {
-            this.props.actions.addItemToCart(item)
-            this.props.actions.removeItemFromInventory(item)
+            this.props.addItemToCart(item)
+            //this.props.removeItemFromInventory(item)
         }
     }
 
     eachItem(item, index) {
-        if (item.category == this.props.category)
-            return (
-                <Item key={index}
-                      id={index}
-                      itemName={item.itemName}
-                      imgSrc={item.imgSrc}
-                      price={item.price}
-                      quantityRemaining={item.quantityRemaining}
-                      clickHandler={this.addItem}
-                >
-                </Item>
-            )
+        if (item.category == this.props.category) {
+          const isDisabled = this.props.cart.items[index] &&
+              this.props.cart.items[index].count == item.quantityRemaining
+
+          return (
+              <Item key={index}
+                    id={index}
+                    itemName={item.itemName}
+                    imgSrc={item.imgSrc}
+                    price={item.price}
+                    quantityRemaining={item.quantityRemaining}
+                    clickHandler={this.addItem}
+                    disabled={isDisabled}
+              >
+              </Item>
+          )
+        }
     }
 
     render() {
@@ -46,9 +49,7 @@ class Inventory extends Component {
     }
 }
 
-export default connect(state => ({
-        inventory: state.inventoryReducer
-    }),
-    dispatch => ({
-        actions: bindActionCreators({removeItemFromInventory, addItemToCart}, dispatch)    //todo: revisit
-    }))(Inventory)
+const mapStateToProps = state => ({inventory: state.inventoryReducer, cart: state.cartReducer})
+const mapDispatchToProps = {addItemToCart, removeItemFromInventory}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Inventory)
