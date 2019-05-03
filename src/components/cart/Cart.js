@@ -2,50 +2,69 @@ import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {connect} from 'react-redux';
 import CartItem from '../cart-item/CartItem'
-import {addItemToInventory, deleteItemFromCart, confirmPurchase, emptyCart, removeItemsFromInventory} from '../../actions'
+import {
+    addItemToCart,
+    addItemToInventory,
+    confirmPurchase,
+    deleteItemFromCart,
+    emptyCart,
+    removeItemFromCart,
+    removeItemsFromInventory
+} from '../../actions'
 import './Cart.css'
 
 class Cart extends Component {
     constructor(props) {
         super(props)
         this.confirmPurchase = this.confirmPurchase.bind(this)
+        this.addItem = this.addItem.bind(this)
         this.eachItem = this.eachItem.bind(this)
         this.emptyCart = this.emptyCart.bind(this)
-        this.handleDelete = this.handleDelete.bind(this)
+        this.deleteItem = this.deleteItem.bind(this)
+        this.removeItem = this.removeItem.bind(this)
     }
 
-    confirmPurchase(){
-        console.log('confirmPurchase')
+    addItem(itemId) {
+        this.props.addItemToCart(this.props.cart.items[itemId])
+    }
+
+    confirmPurchase() {
         this.props.removeItemsFromInventory(this.props.cart.items)
         this.props.confirmPurchase()
     }
 
-    eachItem(id) {
-        const item = this.props.cart.items[id]
+    eachItem(itemId) {
+        const item = this.props.cart.items[itemId]
         return (
             <CSSTransition
-                key={id}
+                key={itemId}
                 classNames="cart-item"
                 timeout={{enter: 500, exit: 300}}>
-                <CartItem id={id}
-                          key={id}
+                <CartItem id={itemId}
+                          key={itemId}
                           count={item.count}
                           amount={item.amount}
                           imgSrc={require('../../assets/images/' + item.imgSrc)}
                           price={item.price}
-                          handleDelete={this.handleDelete}>
+                          handleAdd={this.addItem}
+                          handleDelete={this.deleteItem}
+                          handleRemove={this.removeItem}>
                 </CartItem>
             </CSSTransition>
         )
+    }
+
+    deleteItem(itemId) {
+        const item = this.props.cart.items[itemId]
+        this.props.deleteItemFromCart(item)
     }
 
     emptyCart() {
         this.props.emptyCart()
     }
 
-    handleDelete(itemId) {
-        const item = this.props.cart.items[itemId]
-        this.props.deleteItemFromCart(item)
+    removeItem(itemId) {
+        this.props.removeItemFromCart(this.props.cart.items[itemId])
     }
 
     renderItemsCount() {
@@ -80,6 +99,14 @@ class Cart extends Component {
 
 
 const mapStateToProps = state => ({cart: state.cartReducer})
-const mapDispatchToProps = {addItemToInventory, confirmPurchase, deleteItemFromCart, emptyCart, removeItemsFromInventory}
+const mapDispatchToProps = {
+    addItemToCart,
+    addItemToInventory,
+    confirmPurchase,
+    deleteItemFromCart,
+    emptyCart,
+    removeItemFromCart,
+    removeItemsFromInventory
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

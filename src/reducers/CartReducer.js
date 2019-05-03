@@ -3,13 +3,12 @@ import * as actionType from '../actions/ActionType'
 const initialState = {items: {}, totalAmount: 0, itemsCount: 0}
 
 /**
- * Handles CRUd operations on cart
+ * Handles CRUD operations on cart
  * @param state
  * @param action
  * @returns {*}
  */
 const cartReducer = (state = initialState, action) => {
-    let newState
     switch (action.type) {
         case actionType.ADD_ITEM_TO_CART:
             return addItem(state, action)
@@ -24,7 +23,7 @@ const cartReducer = (state = initialState, action) => {
             return emptyCart(state)
 
         case actionType.REMOVE_ITEM_FROM_CART:
-            return newState = state - action.payload
+            return removeItem(state, action)
 
         default:
             return state
@@ -43,12 +42,20 @@ const addItem = (state, action) => {
 
     let newState = {items: {...state.items, ...{[id]: action.item}}}
 
+    //Update item count
+    newState.items[id].count = state.items[id] ? state.items[id].count + 1 : 1
+
     newState = updateCart(id, state, newState)
 
     //return new state
     return {...state, ...newState}
 }
 
+/**
+ * Clears the cart upon successful purchase
+ * @param state
+ * @returns {*}
+ */
 const confirmPurchase = (state) => {
     return emptyCart(state)
 }
@@ -80,6 +87,26 @@ const emptyCart = (state) => {
     return updateCart(null, state, newState)
 }
 
+/**
+ * Removes an item from cart
+ * @param state
+ * @param action
+ * @returns {{[p: string]: *}}
+ */
+const removeItem = (state, action) => {
+    const id = action.item.id
+
+    //Remove the last item type from cart
+    if (state.items[id] && action.item.count === 1)
+        return deleteItem(state, action)
+
+    action.item.count--
+    let newState = {items: {...state.items, ...{[id]: action.item}}}
+    newState = updateCart(id, state, newState)
+
+    //return new state
+    return {...state, ...newState}
+}
 
 /**
  *
@@ -92,11 +119,9 @@ const updateCart = (id, state, newState) => {
     if (id !== null && newState.items[id]) {
         const price = newState.items[id].price
 
-        //Update item count
-        newState.items[id].count = state.items[id] ? state.items[id].count + 1 : 1
-
         //Update item total
-        newState.items[id].amount = state.items[id] ? (price * newState.items[id].count).toFixed(2) : price
+        newState.items[id].amount = state.items[id] ?
+            (price * newState.items[id].count).toFixed(2) : price
     }
 
     //Update items count

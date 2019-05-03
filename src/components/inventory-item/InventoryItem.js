@@ -4,13 +4,13 @@ import './InventoryItem.css';
 class InventoryItem extends Component {
     constructor(props) {
         super(props)
-        this._handleClick = this._handleClick.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
-    _handleClick() {
+    handleClick() {
         if (this.props.disabled) return
         const {clickHandler, ...itemProps} = this.props;
-        this.props.clickHandler(itemProps)
+        clickHandler(itemProps)
     }
 
     render() {
@@ -28,10 +28,12 @@ class InventoryItem extends Component {
                             </sup>
                         </span>
                         <span className="item__quantity"
-                              title={`${this.props.quantityRemaining} In Stock`}>{this.props.quantityRemaining} In Stock</span>
+                              title={`${this.props.quantityRemaining} In Stock`}>
+                            {this.props.quantityRemaining} In Stock
+                        </span>
                     </div>
                     <div className={`item__action animate ${this.props.disabled ? 'item__action--disabled' : ''}`}
-                         onClick={this._handleClick}>Add to Cart
+                         onClick={this.handleClick}>Add to Cart
                     </div>
                 </div>
             </div>

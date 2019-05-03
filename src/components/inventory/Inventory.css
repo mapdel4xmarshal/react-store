@@ -1,6 +1,7 @@
 .inventory{
     display: inline-grid;
     grid-template-columns: repeat(auto-fit, 220px);
+    grid-template-rows: 322px;
     grid-gap: 15px;
     padding: 20px;
     overflow-y: auto;

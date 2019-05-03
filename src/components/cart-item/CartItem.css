@@ -26,6 +26,10 @@
     align-items: center;
     display: grid;
     grid-template-columns: 65px auto;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
 }
 
 .cart-item__count{
