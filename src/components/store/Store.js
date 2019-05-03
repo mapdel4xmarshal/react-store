@@ -6,11 +6,6 @@ import {connect} from 'react-redux';
 import './Store.css';
 
 class Store extends Component {
-  constructor(props) {
-    super(props)
-   console.log()
-  }
-
   render() {
     return (
       <TransitionGroup>

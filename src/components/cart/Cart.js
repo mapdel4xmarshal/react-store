@@ -2,75 +2,84 @@ import React, {Component} from 'react'
 import {TransitionGroup, CSSTransition} from 'react-transition-group'
 import {connect} from 'react-redux';
 import CartItem from '../cart-item/CartItem'
-import {addItemToInventory, deleteItemFromCart} from '../../actions'
+import {addItemToInventory, deleteItemFromCart, confirmPurchase, emptyCart, removeItemsFromInventory} from '../../actions'
 import './Cart.css'
 
 class Cart extends Component {
-  constructor(props) {
-    super(props)
-    this.eachItem = this.eachItem.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
-  }
+    constructor(props) {
+        super(props)
+        this.confirmPurchase = this.confirmPurchase.bind(this)
+        this.eachItem = this.eachItem.bind(this)
+        this.emptyCart = this.emptyCart.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
+    }
 
-  eachItem(id) {
-    const item = this.props.cart.items[id]
-    return (
-      <CSSTransition
-          key={id}
-          classNames="cart-item"
-          timeout={{enter: 500, exit: 300}}>
-        <CartItem id={id}
-                  key={id}
-                  count={item.count}
-                  amount={item.amount}
-                  imgSrc={require('../../assets/images/' + item.imgSrc)}
-                  price={item.price}
-                  handleDelete={this.handleDelete}>
-        </CartItem>
-      </CSSTransition>
-    )
-  }
+    confirmPurchase(){
+        console.log('confirmPurchase')
+        this.props.removeItemsFromInventory(this.props.cart.items)
+        this.props.confirmPurchase()
+    }
 
-  handleDelete(itemId) {
-    const item = this.props.cart.items[itemId]
-    this.props.deleteItemFromCart(item)
-  }
+    eachItem(id) {
+        const item = this.props.cart.items[id]
+        return (
+            <CSSTransition
+                key={id}
+                classNames="cart-item"
+                timeout={{enter: 500, exit: 300}}>
+                <CartItem id={id}
+                          key={id}
+                          count={item.count}
+                          amount={item.amount}
+                          imgSrc={require('../../assets/images/' + item.imgSrc)}
+                          price={item.price}
+                          handleDelete={this.handleDelete}>
+                </CartItem>
+            </CSSTransition>
+        )
+    }
 
-  emptyCart(){
-  }
+    emptyCart() {
+        this.props.emptyCart()
+    }
 
-  renderItemsCount() {
-    const postfix = this.props.cart.itemsCount > 1 ? 'items' : 'item'
-    return `${this.props.cart.itemsCount} ${postfix}`
-  }
+    handleDelete(itemId) {
+        const item = this.props.cart.items[itemId]
+        this.props.deleteItemFromCart(item)
+    }
 
-  renderTotal() {
-    if (this.props.cart.itemsCount > 0)
-      return (
-          <div className="cart__summary">
-            <span className="cart__total">Total: ${this.props.cart.totalAmount}</span>
-            <span className="cart__empty animate">Empty Cart</span>
-            <div className="cart_confirm animate">Confirm Purchase</div>
-          </div>
-      )
-  }
+    renderItemsCount() {
+        const postfix = this.props.cart.itemsCount > 1 ? 'items' : 'item'
+        return `${this.props.cart.itemsCount} ${postfix}`
+    }
 
-  render() {
-    return (
-        <div className="cart">
-          <div className="cart__title">Shopping Cart</div>
-          <small>{this.renderItemsCount()}</small>
-          <TransitionGroup>
-            {Object.keys(this.props.cart.items).map(this.eachItem)}
-          </TransitionGroup>
-          {this.renderTotal()}
-        </div>
-    );
-  }
+    renderTotal() {
+        if (this.props.cart.itemsCount > 0)
+            return (
+                <div className="cart__summary">
+                    <span className="cart__total">Total: ${this.props.cart.totalAmount}</span>
+                    <span className="cart__empty animate" onClick={this.emptyCart}>Empty Cart</span>
+                    <div className="cart_confirm animate" onClick={this.confirmPurchase}>Confirm Purchase</div>
+                </div>
+            )
+    }
+
+    render() {
+        return (
+            <div className="cart">
+                <div className="cart__title">Shopping Cart</div>
+                <small>{this.renderItemsCount()}</small>
+                <TransitionGroup>
+                    {Object.keys(this.props.cart.items).map(this.eachItem)}
+                </TransitionGroup>
+                {this.renderTotal()}
+            </div>
+        );
+    }
 }
 
 
 const mapStateToProps = state => ({cart: state.cartReducer})
-const mapDispatchToProps = {addItemToInventory, deleteItemFromCart}
+const mapDispatchToProps = {addItemToInventory, confirmPurchase, deleteItemFromCart, emptyCart, removeItemsFromInventory}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

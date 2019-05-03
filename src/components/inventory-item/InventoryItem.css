@@ -61,6 +61,12 @@
     color: #FFFFFF;
 }
 
+.item__cent{
+    font-size: 12px;
+    position: absolute;
+    top: 10px;
+}
+
 .item__image {
     height: 160px;
     margin: auto;
@@ -80,14 +86,20 @@
 }
 
 .item__stock-info {
+    cursor: default;
     font-size: 36px;
     font-weight: 500;
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    width: 155px;
+    white-space: nowrap;
 }
 
 .item__quantity {
     font-size: 18px;
     font-weight: 400;
-    padding-left: 10px;
+    padding-left: 20px;
 }
 
 

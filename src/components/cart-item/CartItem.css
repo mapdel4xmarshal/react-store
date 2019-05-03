@@ -13,9 +13,9 @@
     cursor: pointer;
     display: inline-block;
     font-weight: 400;
-    height: 15px;
+    height: 25px;
     text-align: center;
-    width: 25px;
+    width: 30px;
 }
 
 .cart-item__button:hover{
